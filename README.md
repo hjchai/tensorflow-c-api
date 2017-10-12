@@ -32,12 +32,12 @@ Download at [nsync git repos](https://github.com/google/nsync/tree/master/public
 bazel build  //tensorflow:libtensorflow_cc.so
 ```
 
-3. Then Copy the following include headers and dynamic shared library to `/usr/local/lib` and `/usr/local/include`:
+3. Merge `bazel-genfiles/tensorflow` with `tensorlow/tensorflow`
+
+4. Then Copy the following include headers and dynamic shared library to `/usr/local/lib` and `/usr/local/include` (You are at `tensorflow` main folder):
 ```sh
-mkdir /usr/local/include/tf
-cp -r bazel-genfiles/ /usr/local/include/tf/
-cp -r tensorflow /usr/local/include/tf/
-cp -r third_party /usr/local/include/tf/
+cp -r tensorflow /usr/local/include/
+cp -r third_party /usr/local/include/
 cp -r bazel-bin/libtensorflow_cc.so /usr/local/lib/
 ```
 
@@ -45,6 +45,14 @@ cp -r bazel-bin/libtensorflow_cc.so /usr/local/lib/
 ```sh
 g++ -std=c++11 -o tTest test.cc -I/usr/local/include/tf -I/usr/local/include/eigen3 -g -Wall -D_DEBUG -Wshadow -Wno-sign-compare -w -L/usr/local/lib/libtensorflow_cc -ltensorflow_cc -L/usr/local/lib/libtensorflow_framework -ltensorflow_framework `pkg-config --cflags --libs protobuf`
 ```
+
+## How to port to VENTOS
+
+1. Add `-I/usr/local/include/eigen3` to `Property->OMNeT++->Makemake->src->Options->Preview`.
+
+2. Add `tensorflow_cc` and `tensorflow_framework` to `Property->OMNeT++->Makemake->src->Options->Link`.
+
+3. Include `tensorflow` head files.
 
 ### Related discussions:
 * [tensorflow mobile : pi_examples - unable to locate graph.pb.h #3251](https://github.com/tensorflow/tensorflow/issues/3251)
