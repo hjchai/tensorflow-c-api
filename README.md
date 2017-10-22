@@ -1,3 +1,4 @@
+
 # Documentation for setting up running environment for Tensorflow C++ API without bazel
 
 
@@ -54,6 +55,27 @@ g++ -std=c++11 -o tTest test.cc -I/usr/local/include/tf -I/usr/local/include/eig
 
 3. Include `tensorflow` head files.
 
+## Graph building
+* [This talks about how to load checkpoint to C++](https://stackoverflow.com/questions/35508866/tensorflow-different-ways-to-export-and-run-graph-in-c/43639305#43639305)
+
+* [In this post one can find how to save to checkpoint in C++](https://github.com/tensorflow/tensorflow/issues/11236)
+
+* [In this post one can find an example how to load a graph into C++](https://tebesu.github.io/posts/Training-a-TensorFlow-graph-in-C++-API)
+
+* [In this post one can find a detailed example on how to save/load a checkpoint in Python](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)
+
+Note on exporting graph and model in tensorflow:
+
+1. Simple tensorflow graph file *.pb only contains graph topology information. It doesn't contain any variables like weight or bias information.
+
+2. Metagraph(checkpoint files) contains graph information in *.meta, and variable values in *.data and *.index files.
+
+3. One can consolidate \*.pb and \*.meta/\*.data/\*.index into a single \*.pb file which is known as frozen graph. (Python API provides a frozen_graph.py script to freeze a graph)
+
+4. However, frozen graph can only be used for inference. One can reload the frozen graph in other applications and use it to do tasks like prediction. But it can't be used for further training. This is because the variables are converted to constants when the graph is frozen.
+
+5. In order to make the saved graph applicable for continuing training, the following approach can be used (at least for TF version 1.3.0): load checkpoint files. This is so far the only possible way to reuse a pre-trained model for continuing training purpose.
+
 ### Related discussions:
 * [tensorflow mobile : pi_examples - unable to locate graph.pb.h #3251](https://github.com/tensorflow/tensorflow/issues/3251)
 
@@ -62,3 +84,5 @@ g++ -std=c++11 -o tTest test.cc -I/usr/local/include/tf -I/usr/local/include/eig
 * [See comments about undefined reference.](http://tuatini.me/building-tensorflow-as-a-standalone-project/)
 
 * [Missing nsync](https://github.com/tensorflow/tensorflow/issues/12482)
+
+> Written with [StackEdit](https://stackedit.io/).
