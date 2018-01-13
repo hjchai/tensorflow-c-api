@@ -22,6 +22,12 @@ Download at [nsync git repos](https://github.com/google/nsync/tree/master/public
 
 [Follow this discussion.](https://github.com/tensorflow/tensorflow/issues/1890)
 
+* `libcupti.*` missing or no `extras/CUPTI` related problem
+1. Install `libcupti8.0` and `libcupti-dev` from deb packages. See [this](https://github.com/tensorflow/tensorflow/issues/9341#issuecomment-324041125) post.
+2. create etras/CUPTI directory and link it with libcupti libraries. See [this](https://github.com/tensorflow/tensorflow/issues/3526#issuecomment-235882334) post.
+
+
+
 ## Steps:
 
 1. Install `protocbuf` and `eigen`.
