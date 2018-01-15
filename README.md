@@ -32,6 +32,7 @@ Download at [nsync git repos](https://github.com/google/nsync/tree/master/public
 ## Steps:
 
 1. Install `protocbuf` and `eigen`.
+`eigen` comes with VENTOS already, so no need to install it again. protobuf need to be installed from source code. Follow the instruction in [here](https://github.com/hjchai/tensorflow-c-api/blob/master/install%20protobuf). As for tensorflow version v1.5.0 and bazel 0.9.0, only protobuf v3.4.0 works.
 
 2. 
 
