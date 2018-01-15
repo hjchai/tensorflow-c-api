@@ -1,5 +1,6 @@
 
 # Documentation for setting up running environment for Tensorflow C++ API without bazel
+[Updated 1/14/2018]
 
 
 ## Possible problems:
@@ -12,7 +13,7 @@ Locate file at `~/Desktop/tensorflow/bazel-bin/tensorflow`. Need to run `sudo ld
 
 Download at [nsync git repos](https://github.com/google/nsync/tree/master/public), and place it in the right folder `tensorflow/core/platform/default/`.
 
-* Tensorflow version = `1.3.0`; Bazel version = `0.6.1`; Protocbuff version = `3.4.0`
+* Tensorflow version = `1.5.0-rc1/master`; Bazel version = `0.9.0`; Protocbuff version = `3.4.0`
 
 
 * Remember to run `./configure` in tensorflow main repo before run bazel command `bazel build //tensorflow:libtensorflow_cc.so`.
