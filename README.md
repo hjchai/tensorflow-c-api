@@ -1,17 +1,17 @@
 
 # Documentation for setting up running environment for Tensorflow C++ API without bazel
-[Updated 1/14/2018]
+[Updated 2/2/2018]
 
 
 ## Possible problems:
 
  * Libtensorflow_framework.so not found! 
 
-Locate file at `~/Desktop/tensorflow/bazel-bin/tensorflow`. Need to run `sudo ldconfig` to refresh linker.
+    Locate file at `~/Desktop/tensorflow/bazel-bin/tensorflow`. Need to run `sudo ldconfig` to refresh linker.
  
  * Nsync.h not found!
 
-Download at [nsync git repos](https://github.com/google/nsync/tree/master/public), and place it in the right folder `tensorflow/core/platform/default/`.
+    Download at [nsync git repos](https://github.com/google/nsync/tree/master/public), and place it in the right folder `tensorflow/core/platform/default/`.
 
 * Tensorflow version = `1.5.0-rc1/master`; Bazel version = `0.9.0`; Protocbuff version = `3.4.0`
 
@@ -31,10 +31,21 @@ Download at [nsync git repos](https://github.com/google/nsync/tree/master/public
 
 ## Steps:
 
-1. Install `protocbuf` and `eigen`.
-`eigen` comes with VENTOS already, so no need to install it again. protobuf need to be installed from source code. Follow the instruction in [here](https://github.com/hjchai/tensorflow-c-api/blob/master/install%20protobuf). As for tensorflow version v1.5.0 and bazel 0.9.0, only protobuf v3.4.0 works.
+1. Install `protocbuf`, `bazel` and `eigen`.
 
-2. 
+    `eigen` comes with VENTOS already, so no need to install it again. 
+    
+    protobuf need to be installed from source code. Follow the instruction in [here](https://github.com/hjchai/tensorflow-c-api/blob/master/install%20protobuf) to install protobuf from source. 
+
+    `bazel` released version can be downloaded from [here](https://github.com/bazelbuild/bazel/releases). Use the following command to install `bazel`:
+
+    ```sh
+    sudo dpkg -i bazel_0.9.0-linux-x86_64.deb
+    ```
+    
+    As for tensorflow version v1.5.0-rc1 and bazel 0.9.0, only protobuf v3.4.0 works. (As Feb 2, 2018, bazel 0.10.0 does not work with tensorflow v1.5.0-rc1. Use bazel 0.9.0 instead.).
+2. Install `cuda-8.0` and `cudnn-6.1`. Follow [this](https://github.com/hjchai/tensorflow-c-api/blob/master/install%20cuda%20and%20cudnn) instruction.
+2. Start to build tensorflow libraries.
 
 ```sh
 ./configure
@@ -47,7 +58,8 @@ bazel build  //tensorflow:libtensorflow_cc.so
 ```sh
 cp -r tensorflow /usr/local/include/
 cp -r third_party /usr/local/include/
-cp -r bazel-bin/libtensorflow_cc.so /usr/local/lib/
+cp -r bazel-bin/tensorflow/libtensorflow_cc.so /usr/local/lib/
+cp -r bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib/
 ```
 
 4. Lastly, compile using an example:
