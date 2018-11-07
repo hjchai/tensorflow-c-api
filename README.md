@@ -64,7 +64,7 @@ cp -r bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib/
 
 4. Lastly, compile using an example:
 ```sh
-g++ -std=c++11 -o tTest test.cc -I/usr/local/include/tf -I/usr/local/include/eigen3 -g -Wall -D_DEBUG -Wshadow -Wno-sign-compare -w -L/usr/local/lib/libtensorflow_cc -ltensorflow_cc -L/usr/local/lib/libtensorflow_framework -ltensorflow_framework `pkg-config --cflags --libs protobuf`
+g++ -std=c++11 -o tTest test.cc -I/usr/local/include/tensorflow/contrib/makefile/downloads/absl -I/usr/local/include/tf -I/usr/local/include/eigen3 -g -Wall -D_DEBUG -Wshadow -Wno-sign-compare -w -L/usr/local/lib/libtensorflow_cc -ltensorflow_cc -L/usr/local/lib/libtensorflow_framework -ltensorflow_framework `pkg-config --cflags --libs protobuf`
 ```
 
 ## How to port to VENTOS
